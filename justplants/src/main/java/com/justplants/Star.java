@@ -1,4 +1,4 @@
-package com.example.justplants;
+package com.justplants;
 
 import java.io.IOException;
 

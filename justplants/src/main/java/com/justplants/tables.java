@@ -1,4 +1,4 @@
-package com.example.justplants;
+package com.justplants;
 
 public class tables {
     static String product="products";
