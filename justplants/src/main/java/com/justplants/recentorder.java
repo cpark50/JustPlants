@@ -1,4 +1,4 @@
-package com.example.justplants;
+package com.justplants;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.mysql.cj.xdevapi.Result;
 
 import java.util.ArrayList;
 import java.util.Map;
