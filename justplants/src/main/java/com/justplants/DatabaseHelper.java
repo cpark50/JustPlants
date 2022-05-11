@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseHelper {
-    static String schemaName="JustPlantsProducts";
-    static String passwd="aliceqiu367";
+    static String schemaName="pa124";
+    static String passwd="cindy1234";
 
     static String product="products";
     static String order="order_info";
