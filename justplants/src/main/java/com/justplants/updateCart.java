@@ -2,7 +2,6 @@ package com.justplants;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -44,16 +43,14 @@ public class updateCart extends HttpServlet {
             resp.sendRedirect("http://localhost:8080/ecommerce/viewCart");
 
 
-            Class.forName("com.mysql.jdbc.Driver"); //load library
-            Connection con = DriverManager.getConnection("jdbc:mysql:// localhost:3306/" + credentials.schemaName, "root", credentials.passwd);
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+            Connection con = databaseHelper.getConnection();
             Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+tables.product;
+            String sql = "SELECT * FROM "+ databaseHelper.getProduct();
             
             con.close();
         }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        } catch (SQLException e) {
+        catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

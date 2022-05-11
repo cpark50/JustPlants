@@ -3,7 +3,6 @@ package com.justplants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
@@ -33,8 +32,8 @@ public class keepOrder extends HttpServlet {
             int userId = (int)session.getAttribute("visitorId");
             Integer total = 0;
 
-            Class.forName("com.mysql.jdbc.Driver"); //load library
-            Connection con = DriverManager.getConnection("jdbc:mysql:// localhost:3306/" + credentials.schemaName, "root", credentials.passwd);
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+            Connection con = databaseHelper.getConnection();            
             Statement stmt = con.createStatement();
             String sql = "";
             String fLine = "INSERT INTO order_info(u_id, shipping";
@@ -82,9 +81,7 @@ public class keepOrder extends HttpServlet {
             }
             out.println("</body></html>");    
         }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        } catch (SQLException e) {
+        catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

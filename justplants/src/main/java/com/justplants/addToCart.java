@@ -3,7 +3,6 @@ package com.justplants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -73,11 +72,11 @@ public class addToCart extends HttpServlet {
             session.setAttribute("totalPlants", totalPlants + plant_qt);
             resp.sendRedirect("http://localhost:8080/ecommerce/product/"+plant_id);
 
-
-            Class.forName("com.mysql.jdbc.Driver"); //load library
-            Connection con = DriverManager.getConnection("jdbc:mysql:// localhost:3306/" + credentials.schemaName, "root", credentials.passwd);
+            
+            DatabaseHelper databaseHelper = new DatabaseHelper();
+            Connection con = databaseHelper.getConnection();            
             Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+tables.product+" WHERE id=" +plant_id;
+            String sql = "SELECT * FROM "+ databaseHelper.getProduct()+" WHERE id=" +plant_id;
             ResultSet rs = stmt.executeQuery(sql);
             
             writer.println("<div class=\"product-price\"><span> $" + ".00 </span></div>");
@@ -87,9 +86,7 @@ public class addToCart extends HttpServlet {
             writer.println("<button type=\"submit\">Add to cart</button></form>");
             writer.println("</div></div></main>");
         }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        } catch (SQLException e) {
+        catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

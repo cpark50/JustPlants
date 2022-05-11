@@ -3,7 +3,6 @@ package com.justplants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -54,24 +53,21 @@ public class recentorder extends HttpServlet{
         "</script>"
     };
 
-    Connection conn;
+    Connection con;
+    DatabaseHelper databaseHelper;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql:// localhost:3306/" + credentials.schemaName, "root", credentials.passwd);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        databaseHelper = new DatabaseHelper();
+        con = databaseHelper.getConnection();        
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             //System.out.println("recentorder -> get");
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //System.out.println("recentorder -> connected");
             HttpSession session = req.getSession(true);
             //String uid = "1";
@@ -116,7 +112,7 @@ public class recentorder extends HttpServlet{
             }
                       
             //show 5 recent items
-            String selectProductsSql = "SELECT * FROM " + tables.product;
+            String selectProductsSql = "SELECT * FROM " + databaseHelper.getProduct();
             ResultSet prod_result = stmt.executeQuery(selectProductsSql);
 
             PrintWriter writer = resp.getWriter();
