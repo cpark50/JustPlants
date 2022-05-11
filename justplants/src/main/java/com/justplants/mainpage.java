@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 //when to close the db? 
 //add information to and query table
-@WebServlet(name = "home", urlPatterns = "") //@WebServlet(name="JDBC Demo", urlPatterns="/link")
+@WebServlet(name = "home") //@WebServlet(name="JDBC Demo", urlPatterns="/link")
 public class mainpage extends HttpServlet {
 
     @Override
