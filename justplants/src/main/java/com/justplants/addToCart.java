@@ -25,29 +25,6 @@ public class addToCart extends HttpServlet {
         super.init();
     }
     
-    // @Override
-    // protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    //     resp.setContentType("text/html;charset=UTF-8");
-    //     try(PrintWriter out = resp.getWriter()){ //slow. connection. 
-    //         HttpSession session = req.getSession(true);
-    //         int plant_id = Integer.parseInt(req.getParameter("plant_name"));
-    //         int plant_qt = Integer.parseInt(req.getParameter("quantity"));
-            
-    //         int[] currentCart = (int[]) session.getAttribute("cart");
-            
-    //         if (currentCart == null){
-    //             currentCart = new int[11];
-    //             currentCart[plant_id] += plant_qt;
-    //         }
-    //         else {
-    //             currentCart[plant_id] += plant_qt;
-    //         }
-    //         session.setAttribute("cart", currentCart);
-    //         out.println("session created and added the item");
-    //     }
-        
-
-    // }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         

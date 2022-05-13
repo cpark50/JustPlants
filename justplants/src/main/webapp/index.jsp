@@ -49,7 +49,7 @@
             while (rs.next()){
         %>
         <div class="col-1" id= <%= rs.getInt("id") %> >
-            <a href="./product/<%= rs.getInt("id") %>">
+            <a href="./product.jsp?plant_id=<%= rs.getInt("id") %>">
                 <img src="images/<%= rs.getString("imagename") %>" alt=<%= rs.getString("p_name") %>>
                 <p class="pname"><%= rs.getString("p_name") %></p>
                 <p class="price">$<%= rs.getInt("p_price") %>.00</p>
