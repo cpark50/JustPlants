@@ -4,6 +4,7 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.concurrent.ThreadLocalRandom" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -15,7 +16,13 @@
     </head>
 
     <body>
-        <!-- use javabean to add session -->
+        <!-- add session -->
+        <%
+            if (session.isNew()){
+                int userId = ThreadLocalRandom.current().nextInt();
+                session.setAttribute("visitorId", userId);
+            }
+        %>
         <div class="title">
             <h1>
                 <a href="">JustPlants</a>
@@ -29,7 +36,15 @@
             String sql = "SELECT * FROM "+ databaseHelper.getProduct();
             ResultSet rs = stmt.executeQuery(sql);
         %>
-        <%! int total_plants = 0; %>
+        <%! int totalPlants = 0; %>
+        <%
+            if(null == session.getAttribute("totalPlants")) {
+                session.setAttribute("totalPlants", totalPlants);
+            }
+            else {
+                totalPlants = (int) session.getAttribute("totalPlants");
+            }
+        %>
         
         <div class="nav_bar">
             <ul>
@@ -40,7 +55,7 @@
                     <a href="aboutcompany.html">About Company</a>
                 </li>
                 <li>
-                    <a href="viewCart">View Shopping Cart(<%= total_plants %>)</a>
+                    <a href="viewCart">View Shopping Cart(<%= totalPlants %>)</a>
                 </li>
             </ul>
         </div>
@@ -57,5 +72,13 @@
         </div>
         <% } %>
         <!-- include recent orders -->
+        <jsp:include page="/recentorder" flush="true" />
+
+        <!-- close connections -->
+        <%
+            rs.close();
+            stmt.close();
+            con.close();
+        %>
     </body>
 </html>

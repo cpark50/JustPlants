@@ -66,7 +66,7 @@
         </div>
         <div class="right-column">
             <div class="product-description">
-                <p><i>othername: <%= rs.getString("p_othername")%></i>
+                <p><i>othername: <%= rs.getString("p_othername")%></i><br>
                 <%= rs.getString("p_desc")%><%= rs.getString("p_desc2")%><br><br>
                 <i>size (height × width × diameter): <br><%= rs.getString("p_price")%></i>
                 <br><br>
