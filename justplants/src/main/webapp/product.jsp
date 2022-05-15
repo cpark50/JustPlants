@@ -23,16 +23,18 @@
         </div>
         
         <% 
-            String plantId = request.getParameter("plant_id");
-            DatabaseHelper databaseHelper = new DatabaseHelper();
-            Connection con = databaseHelper.getConnection();
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+ databaseHelper.getProduct() + " WHERE id="+ plantId;
-            ResultSet rs = stmt.executeQuery(sql);
-            String friend = "best kept away from pets and children";
-        %>
-        <%! int total_plants = 0; %>
-        
+        String plantId = request.getParameter("plant_id");
+        int total_plants = 0;
+        if (request.getSession().getAttribute("totalPlants") != null){
+            total_plants = (Integer) request.getSession().getAttribute("totalPlants");
+        }
+        DatabaseHelper databaseHelper = new DatabaseHelper();
+        Connection con = databaseHelper.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = "SELECT * FROM "+ databaseHelper.getProduct() + " WHERE id="+ plantId;
+        ResultSet rs = stmt.executeQuery(sql);
+        String friend = "best kept away from pets and children";
+        %>       
         <div class="nav_bar">
             <ul>
                 <li>
