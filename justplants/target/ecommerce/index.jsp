@@ -22,7 +22,6 @@
                 int userId = ThreadLocalRandom.current().nextInt();
                 session.setAttribute("visitorId", userId);
             }
-            System.out.println("Hello " + session.getAttribute("visitorId"));
         %>
         <div class="title">
             <h1>
@@ -36,17 +35,11 @@
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM "+ databaseHelper.getProduct();
             ResultSet rs = stmt.executeQuery(sql);
-        %>
-        <%! int totalPlants = 0; %>
-        <%
-            if(null == session.getAttribute("totalPlants")) {
-                session.setAttribute("totalPlants", totalPlants);
-            }
-            else {
-                totalPlants = (int) session.getAttribute("totalPlants");
+            int total_plants = 0;
+            if (request.getSession().getAttribute("totalPlants") != null){
+                total_plants = (Integer) request.getSession().getAttribute("totalPlants");
             }
         %>
-        
         <div class="nav_bar">
             <ul>
                 <li>
@@ -56,7 +49,7 @@
                     <a href="aboutcompany.html">About Company</a>
                 </li>
                 <li>
-                    <a href="viewCart">View Shopping Cart(<%= totalPlants %>)</a>
+                    <a href="viewCart">View Shopping Cart(<%= total_plants %>)</a>
                 </li>
             </ul>
         </div>

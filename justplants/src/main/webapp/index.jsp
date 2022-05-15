@@ -49,7 +49,7 @@
                     <a href="aboutcompany.html">About Company</a>
                 </li>
                 <li>
-                    <a href="viewCart">View Shopping Cart(<%= totalPlants %>)</a>
+                    <a href="viewCart">View Shopping Cart(<%= total_plants %>)</a>
                 </li>
             </ul>
         </div>
