@@ -29,7 +29,7 @@ public class addToCart extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         HttpSession session = req.getSession(true);
-        PrintWriter writer = resp.getWriter();
+        int totalPlants = 0;
         int plant_id = Integer.parseInt(req.getParameter("plant_name"));
         int plant_qt = Integer.parseInt(req.getParameter("quantity"));
         int[] currentCart = (int[]) session.getAttribute("cart");
@@ -42,11 +42,17 @@ public class addToCart extends HttpServlet {
             currentCart[plant_id] += plant_qt;
         }
         session.setAttribute("cart", currentCart);
-        // RequestDispatcher dispatcher = req.getRequestDispatcher("product");
-        // dispatcher.include(req, resp);
-        int totalPlants = (int) session.getAttribute("totalPlants");
-        session.setAttribute("totalPlants", totalPlants + plant_qt);
-        resp.sendRedirect("http://localhost:8080/ecommerce/product/"+plant_id);
+        if(req.getParameter("totalPlants") == null){
+            totalPlants = 0;
+        }
+        else{
+            totalPlants = Integer.parseInt(req.getParameter("totalPlants"));
+        }
+        totalPlants += plant_qt;
+        session.setAttribute("totalPlants", totalPlants);
+        req.setAttribute("totalPlants", totalPlants);
+        req.setAttribute("plant_id", plant_id);
+        resp.sendRedirect("http://localhost:8080/ecommerce/product.jsp?plant_id="+plant_id);
 
     }
 }
