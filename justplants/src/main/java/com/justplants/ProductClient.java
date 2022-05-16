@@ -30,7 +30,7 @@ public class ProductClient {
     }
 
     public String getImage() {
-        return name;
+        return image;
     }
 
     public void setImage(String image) {
@@ -86,7 +86,7 @@ public class ProductClient {
     }
 
     public String getFriend() {
-        return name;
+        return friend;
     }
 
     public void setFriend(String friend) {
