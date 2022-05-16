@@ -8,19 +8,6 @@
         version="4.0">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-    <servlet-name>API Servlet</servlet-name>
-    <servlet-class>
-        org.glassfish.jersey.servlet.ServletContainer
-    </servlet-class>
-    <init-param>
-        <param-name>jersey.config.server.provider.packages</param-name>
-        <param-value>
-            com.justplants
-        </param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet>
     <servlet-name>product</servlet-name>
     <servlet-class>com.justplants.product</servlet-class>
   </servlet>
@@ -48,6 +35,19 @@
   <servlet-name>keepOrder</servlet-name>
     <servlet-class>com.justplants.keepOrder</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>API Servlet</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>com.example.justplants</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>API Servlet</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>viewCart</servlet-name>
     <url-pattern>/viewCart/*</url-pattern>

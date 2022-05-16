@@ -37,11 +37,11 @@ public class addToCart extends HttpServlet {
             currentCart[plant_id] += plant_qt;
         }
         session.setAttribute("cart", currentCart);
-        if(req.getParameter("totalPlants") == null){
+        if(session.getAttribute("totalPlants") == null){
             totalPlants = 0;
         }
         else{
-            totalPlants = Integer.parseInt(req.getParameter("totalPlants"));
+            totalPlants = (int) session.getAttribute("totalPlants");
         }
         totalPlants += plant_qt;
         session.setAttribute("totalPlants", totalPlants);
