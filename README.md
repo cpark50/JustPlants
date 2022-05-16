@@ -32,6 +32,7 @@ The order form is for customers to order products by filling in the information.
 **RESTful APIs**\
 To practice RESTful service for our webpage, we implemented a feature that generates JSON response using Jersey REST framework. The order and product resources interact with the REST services. The product information that is displayed in the product page can be displayed in a JSON format and this can be viewed by using the url (e.g. http://localhost:8080/ecommerce/api/product/9) where the last part of the url can be any value in range [1, 10], which is the id of our product. 
 
+![Alt example of json](https://github.com/cpark50/JustPlants/blob/main/REST%20JSON%20example.png)
 
 
 
