@@ -31,4 +31,8 @@ public class DatabaseHelper {
     public String getProduct(){
         return product;
     }
+
+    public String getOrder(){
+        return order;
+    }
 }

@@ -4,13 +4,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Path("/product")
 public class Api {
@@ -51,21 +48,5 @@ public class Api {
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addProduct(ProductClient product)  {
-        boolean isSuccess = true;
-
-        // System.out.println("Id: " + product.getId());
-        // System.out.println("name: " + product.getName());
-        // System.out.println("rating: " + product.getRating());
-
-        // add product to DB
-        if(isSuccess) {
-            return Response.ok().entity("Product Added Successfully").build();
-        }
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 }
