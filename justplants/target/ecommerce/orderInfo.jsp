@@ -37,10 +37,7 @@
         Connection con = databaseHelper.getConnection();
         Statement stmt = con.createStatement();
         String sql = "SELECT DISTINCT state FROM " + DatabaseHelper.tax;
-<<<<<<< Updated upstream
-=======
         ResultSet rs = stmt.executeQuery(sql);
->>>>>>> Stashed changes
         if (request.getSession().getAttribute("cart") != null){
             currentCart = (int[]) request.getSession().getAttribute("cart");
         }
@@ -66,10 +63,8 @@
                 }
             } 
             %>
-            <div id="totalText">
-                Total: $
-                <div class="totalPrice" id="total"><%= total%>.00</div>
-            </div>
+            <div class="totalPrice">Total(dollar): </div>
+            <div class="totalPrice" id="total"><%= total%>.00</div>
         </fieldset>
 
 <<<<<<< Updated upstream
