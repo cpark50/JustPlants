@@ -1,11 +1,6 @@
 package com.justplants;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,44 +23,31 @@ public class addToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        try{ //slow. connection. 
-            HttpSession session = req.getSession(true);
-            PrintWriter writer = resp.getWriter();
-            int plant_id = Integer.parseInt(req.getParameter("plant_name"));
-            int plant_qt = Integer.parseInt(req.getParameter("quantity"));
-            int[] currentCart = (int[]) session.getAttribute("cart");
-            
-            if (currentCart == null){
-                currentCart = new int[11];
-                currentCart[plant_id] += plant_qt;
-            }
-            else {
-                currentCart[plant_id] += plant_qt;
-            }
-            session.setAttribute("cart", currentCart);
-            // RequestDispatcher dispatcher = req.getRequestDispatcher("product");
-            // dispatcher.include(req, resp);
-            int totalPlants = (int) session.getAttribute("totalPlants");
-            session.setAttribute("totalPlants", totalPlants + plant_qt);
-            resp.sendRedirect("http://localhost:8080/ecommerce/product/"+plant_id);
+        HttpSession session = req.getSession(true);
+        int totalPlants = 0;
+        int plant_id = Integer.parseInt(req.getParameter("plant_name"));
+        int plant_qt = Integer.parseInt(req.getParameter("quantity"));
+        int[] currentCart = (int[]) session.getAttribute("cart");
+        
+        if (currentCart == null){
+            currentCart = new int[11];
+            currentCart[plant_id] += plant_qt;
+        }
+        else {
+            currentCart[plant_id] += plant_qt;
+        }
+        session.setAttribute("cart", currentCart);
+        if(req.getParameter("totalPlants") == null){
+            totalPlants = 0;
+        }
+        else{
+            totalPlants = Integer.parseInt(req.getParameter("totalPlants"));
+        }
+        totalPlants += plant_qt;
+        session.setAttribute("totalPlants", totalPlants);
+        req.setAttribute("totalPlants", totalPlants);
+        req.setAttribute("plant_id", plant_id);
+        resp.sendRedirect("http://localhost:8080/ecommerce/product.jsp?plant_id="+plant_id);
 
-            
-            DatabaseHelper databaseHelper = new DatabaseHelper();
-            Connection con = databaseHelper.getConnection();            
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+ databaseHelper.getProduct()+" WHERE id=" +plant_id;
-            ResultSet rs = stmt.executeQuery(sql);
-            
-            writer.println("<div class=\"product-price\"><span> $" + ".00 </span></div>");
-            writer.println("<div class=\"order-button\"><form action=\"../addToCart\" method=\"get\">");
-            writer.println("<input type=\"number\" name=\"quantity\" step=\"1\" min=\"1\" max=\"\" value=\"1\" title=\"Qty\" class=\"input-text qty text\" size=\"2\" pattern=\"\" inputmode=\"\">");
-            writer.println("<input type=\"hidden\" name=\"plant_name\" value=\""+plant_id+"\">");
-            writer.println("<button type=\"submit\">Add to cart</button></form>");
-            writer.println("</div></div></main>");
-        }
-        catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 }

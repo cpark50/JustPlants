@@ -18,25 +18,27 @@
         <!-- use javabean to add session -->
         <div class="title">
             <h1>
-                <a href="./index.jsp">JustPlants</a>
+                <a href="./">JustPlants</a>
             </h1>
         </div>
         
         <% 
-            String plantId = request.getParameter("plant_id");
-            DatabaseHelper databaseHelper = new DatabaseHelper();
-            Connection con = databaseHelper.getConnection();
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+ databaseHelper.getProduct() + " WHERE id="+ plantId;
-            ResultSet rs = stmt.executeQuery(sql);
-            String friend = "best kept away from pets and children";
-        %>
-        <%! int total_plants = 0; %>
-        
+        String plantId = request.getParameter("plant_id");
+        int total_plants = 0;
+        if (request.getSession().getAttribute("totalPlants") != null){
+            total_plants = (Integer) request.getSession().getAttribute("totalPlants");
+        }
+        DatabaseHelper databaseHelper = new DatabaseHelper();
+        Connection con = databaseHelper.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = "SELECT * FROM "+ databaseHelper.getProduct() + " WHERE id="+ plantId;
+        ResultSet rs = stmt.executeQuery(sql);
+        String friend = "best kept away from pets and children";
+        %>       
         <div class="nav_bar">
             <ul>
                 <li>
-                    <a class="active" href="">Shop <%=plantId%></a>
+                    <a class="active" href="./">Shop</a>
                 </li>
                 <li>
                     <a href="aboutcompany.html">About Company</a>
@@ -77,7 +79,7 @@
                 
                 <div class="product-price"><span>$<%= rs.getInt("p_price") %>.00 </span></div>
                 <div class="order-button">
-                    <form action="../addToCart" method="get">
+                    <form action="addToCart" method="get">
                     <input type="number" name="quantity" step="1" min="1" max="30" value="1" title="Qty" class="input-text qty text" size="2" pattern="" inputmode="">
                     <input type="hidden" name="plant_name" value="<%=plantId%>">
                     <button type="submit">Add to cart</button></form>
