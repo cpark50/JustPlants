@@ -33,7 +33,7 @@
         if(request.getSession().getAttribute("visitorId") != null){
             userId = (int)request.getSession().getAttribute("visitorId");
         }
-        String greeting = "Hello User "+userId;
+        String greeting = "Hello User "+ userId;
         int total = 0;
         %>
         <fieldset>
