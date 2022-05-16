@@ -12,6 +12,8 @@ public class DatabaseHelper {
     static String order="order_info";
     static String rating="ratings";
     static String user="user_info";
+    public static String zip="zip_codes";
+    public static String tax="tax_rates";
 
     public Connection getConnection(){
         try {

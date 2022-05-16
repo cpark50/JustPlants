@@ -74,7 +74,7 @@ public class viewShoppingCart extends HttpServlet {
     
                     if (userCart[p_id] > 0){
                         quantity = userCart[p_id];
-                        writer.println("<div class=\"col-" + count + "\" id=\""+ p_id +"\"><a href=\"./product/"+p_id+"\"><img src=\"images/" + image +"\" alt=\"" + name + "\">");
+                        writer.println("<div class=\"col-" + count + "\" id=\""+ p_id +"\"><a href=\"./product.jsp?plant_id="+p_id+"\"><img src=\"images/" + image +"\" alt=\"" + name + "\">");
                         writer.println("<p class=\"pname\">" + name + "</p>");
                         writer.println("<p class=\"price\"> $" + price + ".00</p></a>");
                         writer.println("<input type=\"number\" name=\"plant"+p_id+"\" step=\"1\" min=\"1\" max=\"30\" value=\""+ quantity +"\" title=\"Qty\" class=\"input-text qty text\" size=\"2\" pattern=\"\" inputmode=\"\">");
@@ -89,7 +89,7 @@ public class viewShoppingCart extends HttpServlet {
                 writer.println("</div>"); //div cart-items
                 writer.println("<div id= \"final-order\" class='edit-or-order'><span> Total Price: $"+ totalPrice + ".00 </span>");
                 writer.println("<input type=\"submit\" value=\"Update Cart\"/></form>");
-                writer.println("<button onclick=\"location.href='./orderInfo'\" type=\"button\">Order Now</button></div>");
+                writer.println("<button onclick=\"location.href='./orderInfo.jsp'\" type=\"button\">Order Now</button></div>");
                 writer.println("</div>"); //div wrapper
             } 
                 

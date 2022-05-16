@@ -25,8 +25,8 @@
         <% 
         String plantId = request.getParameter("plant_id");
         int total_plants = 0;
-        if (request.getSession().getAttribute("totalPlants") != null){
-            total_plants = (Integer) request.getSession().getAttribute("totalPlants");
+        if (session.getAttribute("totalPlants") != null){
+            total_plants = (Integer) session.getAttribute("totalPlants");
         }
         DatabaseHelper databaseHelper = new DatabaseHelper();
         Connection con = databaseHelper.getConnection();
