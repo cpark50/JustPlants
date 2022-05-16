@@ -17,7 +17,12 @@ public class Api {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProduct(@PathParam("id") String id) {
         // get the user info from DB using his "id"
-        boolean idFound = true;
+        boolean idFound = false;
+        int intId = Integer.parseInt(id);
+        if (intId > 0 || intId <= 10){
+            idFound = true;
+        }
+
         if(idFound) {
             ProductClient product = new ProductClient();
             product.setId(id);
@@ -40,13 +45,30 @@ public class Api {
                         product.setFriend("pet and children friendly");
                     }
                 }
+                return Response.ok(product, MediaType.APPLICATION_JSON).build();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            return Response.ok(product, MediaType.APPLICATION_JSON).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addProduct(ProductClient product)  {
+        boolean isSuccess = true;
+
+        // System.out.println("Id: " + product.getId());
+        // System.out.println("name: " + product.getName());
+        // System.out.println("rating: " + product.getRating());
+
+        // add product to DB
+        if(isSuccess) {
+            return Response.ok().entity("Product Added Successfully").build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 }
