@@ -21,17 +21,6 @@ public class OrderApi {
         String sql = "SELECT * FROM " + databaseHelper.getOrder() + " WHERE id=" + id;
         ResultSet rs = stmt.executeQuery(sql);
 
-        
-        while (rs.next()) {
-            System.out.println(rs.getString("shipping"));
-            System.out.println(rs.getInt("u_id"));
-            for (int i = 1; i < 11; i++) {
-                if (rs.getInt("p_" + i) == 1)
-                    System.out.println("p_" + i);
-            }
-        }
-        
-
         Order order = new Order();
         order.setId(id);
 
