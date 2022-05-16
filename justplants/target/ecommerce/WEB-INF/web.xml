@@ -75,4 +75,7 @@
     <servlet-name>keepOrder</servlet-name>
     <url-pattern>/keep</url-pattern>
   </servlet-mapping>
+  <!-- <error-page>
+      <location>/pageNotFound.html</location>
+  </error-page> -->
 </web-app>
