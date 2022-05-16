@@ -67,8 +67,6 @@
             <div class="totalPrice" id="total"><%= total%>.00</div>
         </fieldset>
 
-<<<<<<< Updated upstream
-=======
         <form action="checkOut" name="orderForm" method="post" enctype="text/plain" onsubmit="return (CheckValidation(this))">
         <center>
         <fieldset><legend>Shipping Information</legend>
@@ -111,6 +109,5 @@
         <input type="submit" value="Check Out">
         <input type="reset" value="Reset">
         </center></form>
->>>>>>> Stashed changes
     </body>
 </html>
