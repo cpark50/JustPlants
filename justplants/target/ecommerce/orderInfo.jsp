@@ -40,7 +40,7 @@
             <legend>Cart</legend>
             <div class="CartText"><%= greeting %></div>
             <%
-            if(currentCart){
+            if(currentCart!=null){
                 for(int i=0; i<11; i++){
                     if(currentCart[i]>0){
                         total += plants.PLANT_PRICES[i]*currentCart[i];

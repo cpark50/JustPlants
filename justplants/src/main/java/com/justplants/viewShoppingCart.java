@@ -89,7 +89,7 @@ public class viewShoppingCart extends HttpServlet {
                 writer.println("</div>"); //div cart-items
                 writer.println("<div id= \"final-order\" class='edit-or-order'><span> Total Price: $"+ totalPrice + ".00 </span>");
                 writer.println("<input type=\"submit\" value=\"Update Cart\"/></form>");
-                writer.println("<button onclick=\"location.href='./orderInfo'\" type=\"button\">Order Now</button></div>");
+                writer.println("<button onclick=\"location.href='./orderInfo.jsp'\" type=\"button\">Order Now</button></div>");
                 writer.println("</div>"); //div wrapper
             } 
                 
