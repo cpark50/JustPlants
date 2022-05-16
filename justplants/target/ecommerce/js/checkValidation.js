@@ -39,7 +39,7 @@ function CheckValidation(frm) {
         alert("Missing state!");
         return (false);
     }
-    var zip_regex = /^[1-9][0-9]{4}$/;
+    var zip_regex = /^[1-9][0-9]*$/;
     if(!(zip_regex.test(zip.value))){
         alert("Invalid zip code!");
         return (false);

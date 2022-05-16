@@ -1,5 +1,10 @@
 <%@ page import="javax.xml.crypto.Data" %>
 <%@ page import="com.justplants.plants" %>
+<%@ page import="com.justplants.DatabaseHelper" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -26,6 +31,10 @@
         <%
         int [] currentCart=null;
         int userId=0;
+        DatabaseHelper databaseHelper = new DatabaseHelper();
+        Connection con = databaseHelper.getConnection();
+        Statement stmt = con.createStatement();
+        String sql = "SELECT DISTINCT state FROM " + DatabaseHelper.tax;
         if (request.getSession().getAttribute("cart") != null){
             currentCart = (int[]) request.getSession().getAttribute("cart");
         }
