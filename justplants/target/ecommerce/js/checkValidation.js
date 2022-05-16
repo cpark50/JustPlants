@@ -1,5 +1,4 @@
 function CheckValidation(frm) {
-    var cr = frm.country;
     var fname = frm.fname;
     var lname = frm.lname;
     var phone = frm.phone;
@@ -12,10 +11,6 @@ function CheckValidation(frm) {
     var fullName = frm.fullname;
     var expDate = frm.expDate;
     
-    if(cr.value==""){
-        alert("Missing country/region!")
-        return (false);
-    }
     if(fname.value=="" || lname.value==""){
         alert("Missing name!");
         return (false);
