@@ -28,7 +28,7 @@ public class Order {
     //     return orders;
     // }
 
-    public Map<String, Integer> getProductQuant(){
+    public Map<String, Integer> getOrderInfo(){
         return orderInfo;
     }
 
