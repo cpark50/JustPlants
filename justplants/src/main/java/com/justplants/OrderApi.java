@@ -26,12 +26,15 @@ public class OrderApi {
         order.setId(id);
 
         if (rs.next()){
-            order.addOrder("inside db rs.next");
             order.setShipping(rs.getString("shipping"));
             order.setUid(rs.getInt("u_id"));
             for (int i = 1; i < 11; i++) {
                 if (rs.getInt("p_" + i) > 0)
-                    order.addOrder("p_" + i);
+                {
+                    // order.addOrder("p_" + i);
+                    order.addOrd("p_"+i, rs.getInt("p_"+i));
+                }
+
             }
             return Response.ok(order, MediaType.APPLICATION_JSON).build();
         }
