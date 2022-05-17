@@ -1,5 +1,6 @@
 package com.justplants;
 
+import javax.validation.constraints.Null;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,19 +25,17 @@ public class OrderApi {
         Order order = new Order();
         order.setId(id);
 
-        if (!rs.next()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
-            while (rs.next()) {
-                order.setShipping(rs.getString("shipping"));
-                order.setUid(rs.getInt("u_id"));
-                for (int i = 1; i < 11; i++) {
-                    if (rs.getInt("p_" + i) == 1)
-                        order.addOrder("p_" + i);
-                }
+        if (rs.next()){
+            order.addOrder("inside db rs.next");
+            order.setShipping(rs.getString("shipping"));
+            order.setUid(rs.getInt("u_id"));
+            for (int i = 1; i < 11; i++) {
+                if (rs.getInt("p_" + i) > 0)
+                    order.addOrder("p_" + i);
             }
+            return Response.ok(order, MediaType.APPLICATION_JSON).build();
         }
-        return Response.ok(order, MediaType.APPLICATION_JSON).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST

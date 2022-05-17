@@ -1,12 +1,13 @@
 package com.justplants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     String id;
     int uid;
     String shipping;
-    List<String> orders;
+    List<String> orders = new ArrayList<String>();
 
     public String getId() {
         return id;
