@@ -1,6 +1,5 @@
 package com.justplants;
 
-import javax.validation.constraints.Null;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -9,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 
 @Path("/order")
 public class OrderApi {
@@ -31,8 +31,7 @@ public class OrderApi {
             for (int i = 1; i < 11; i++) {
                 if (rs.getInt("p_" + i) > 0)
                 {
-                    // order.addOrder("p_" + i);
-                    order.addOrd("p_"+i, rs.getInt("p_"+i));
+                    order.addOrder("p_"+i, rs.getInt("p_"+i));
                 }
 
             }
@@ -48,30 +47,29 @@ public class OrderApi {
             DatabaseHelper databaseHelper = new DatabaseHelper();
             Connection con = databaseHelper.getConnection();
             Statement stmt = con.createStatement();
-            String sql = "INSERT INTO " + databaseHelper.getOrder() + "VALUES";
-            sql += "(" + order.getUid() + "," + order.getShipping() + ",";
-            for (int i = 1; i < 11; i++) {
-                if (i < 10) {
-                    if (order.getOrders().contains("p_" + i))
-                        sql += "1, ";
-                    else
-                        sql += "0, ";
-                } else {
-                    if (order.getOrders().contains("p_" + i))
-                        sql += "1)";
-                    else
-                        sql += "0)";
+            String stmtSql = "INSERT INTO " + databaseHelper.getOrder() + "(u_id, shipping";
+            String valueSql = " VALUES(" + order.getUid() + ", \"" + order.getShipping() + "\"";
+            // String checkSql = "SELECT * FROM " + databaseHelper.getOrder() + " WHERE id=" + order.getId();
+            // ResultSet rs = stmt.executeQuery(checkSql);
+
+            for (Map.Entry<String,Integer> o : order.getOrderInfo().entrySet()){
+                if (o.getValue() > 0) {
+                    stmtSql += ", " + o.getKey();
+                    valueSql += ", " + o.getValue();
                 }
             }
-
-            ResultSet rs = stmt.executeQuery(sql);
+            stmtSql += ")";
+            valueSql += ")";
+            String sql = stmtSql + valueSql;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
 
             System.out.println("Id: " + order.getId());
             System.out.println("Shipping: " + order.getShipping());
             System.out.println("Uid: " + order.getUid());
             System.out.println("Orders: ");
-            for (int i = 0; i < order.getOrders().size(); i++) {
-                System.out.println(i);
+            for (Map.Entry<String,Integer> o : order.getOrderInfo().entrySet()){
+                System.out.println(o.getKey() + ": " + o.getValue());
             }
 
             return Response.ok().entity("Order Added Successfully").build();

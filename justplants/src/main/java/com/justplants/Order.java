@@ -1,8 +1,6 @@
 package com.justplants;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Order {
@@ -24,10 +22,6 @@ public class Order {
         return shipping;
     }
 
-    // public List<String> getOrders() {
-    //     return orders;
-    // }
-
     public Map<String, Integer> getOrderInfo(){
         return orderInfo;
     }
@@ -44,11 +38,7 @@ public class Order {
         this.shipping = shipping;
     }
 
-    // public void addOrder(String order){
-    //     orders.add(order);
-    // }
-
-    public void addOrd(String order, int quant){
+    public void addOrder(String order, int quant){
         orderInfo.put(order, quant);
     }
 }

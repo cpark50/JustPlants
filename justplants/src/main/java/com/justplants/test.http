@@ -1,1 +1,13 @@
-get http://localhost:8080/ecommerce/api/order/1
+POST http://localhost:8080/ecommerce/api/order/
+Content-Type: application/json
+
+{
+  "id": "2",
+  "uid": 157239,
+  "shipping": "overnight",
+  "orderInfo": {
+    "p_4": 2,
+    "p_7": 4,
+    "p_9": 6
+  }
+}
