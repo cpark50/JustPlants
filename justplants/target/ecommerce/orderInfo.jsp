@@ -63,8 +63,7 @@
                 }
             } 
             %>
-            <div class="totalPrice">Total(dollar): </div>
-            <div class="totalPrice" id="total"><%= total%>.00</div>
+            <div class="totalPrice" id="total">Total: $<%= total%>.00</div>
         </fieldset>
 
         <form action="checkOut" name="orderForm" method="post" enctype="text/plain" onsubmit="return (CheckValidation(this))">
@@ -73,7 +72,7 @@
         First Name:<br><input type="text" name="fname"><br>
         Last Name:<br><input type="text" name="lname"><br>
         Phone Number:<br><input type="text" name="phone" placeholder="(xxx)-xxx-xxxx"><br>
-        State:<br><input list="states" name="states" id="state" onblur="getTax(this.value)"><br>
+        State:<br><input list="states" name="states" id="state" onblur="getTax(this.value, <%= total%>)"><br>
         <datalist id="states">
         <%
         while(rs.next()){

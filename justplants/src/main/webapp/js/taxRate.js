@@ -1,4 +1,4 @@
-function getTax (state)
+function getTax (state, total)
 {
   if (window.XMLHttpRequest)
   {  // IE7+, Firefox, Chrome, Opera, Safari
@@ -18,7 +18,9 @@ function getTax (state)
     { // Data should look like "Fairfax, Virginia"
         var tax = xhr.responseText;
       //if (document.getElementById ("city").value == "")
-        document.getElementById ("total").innerHTML = parseFloat(document.getElementById ("total").innerHTML)*(1+parseFloat(tax));
+        var totalWithTax = parseFloat(total)*(1+parseFloat(tax));
+        console.log(totalWithTax);
+        document.getElementById("total").innerHTML = "Total: $"+Math.round(totalWithTax*100)/100;
     } 
   } 
   // Call the response software component
